@@ -110,7 +110,19 @@ const uniforms2 = {
     },
 };
 
+const uniformData = {
+    time: {
+        type: 'f',
+        value: 1.0
+    }
+};
 
+const render = () => {
+    uniformData.time.value = 1.0;
+    window.requestAnimationFrame(render);
+
+};
+render();
 
 // MORPH OBJECT
 const mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 2, 2, 256), new THREE.RawShaderMaterial( {
@@ -145,9 +157,11 @@ scene.add(mesh3);
 const boxGeometry = new THREE.BoxGeometry(2,2,2,2,2,2)
 const boxMaterial = new THREE.ShaderMaterial({
     wireframe: true,
+    uniforms: uniformData,
     vertexShader:`
+    uniform float time;
     void main() {
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position.x, sin(position.z) + position.y, position.z, 1.0);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(tan(position.x) + sin(position.z),  sin(position.y) + sin(time), cos(position.z), 1.0);
     }
     `,
     fragmentShader:`
