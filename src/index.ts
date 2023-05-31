@@ -1,4 +1,4 @@
-import { vertexShader, fragmentShader, vertexShader1, fragmentShader1} from './utils/shaders';
+import { vertexShader1, fragmentShader1, vertexShader2, fragmentShader2} from './utils/shaders';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { initGUI } from './utils/gui';
@@ -115,8 +115,8 @@ const uniforms2 = {
 // MORPH OBJECT
 const mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 2, 2, 256), new THREE.RawShaderMaterial( {
     uniforms: uniforms,
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
+    vertexShader: vertexShader1,
+    fragmentShader: fragmentShader1,
     side: THREE.DoubleSide,
     transparent: true,
 } ));
@@ -124,8 +124,8 @@ scene.add(mesh);
 
 const mesh2 = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 3, 3, 256), new THREE.RawShaderMaterial( {
     uniforms: uniforms1,
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
+    vertexShader: vertexShader1,
+    fragmentShader: fragmentShader1,
     side: THREE.DoubleSide,
     transparent: true,
 } ));
@@ -134,8 +134,8 @@ scene.add(mesh2);
 
 const mesh3 = new THREE.Mesh(new THREE.SphereGeometry(2, 3, 3, 256), new THREE.RawShaderMaterial( {
     uniforms: uniforms2,
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
+    vertexShader: vertexShader2,
+   fragmentShader: fragmentShader2,
     side: THREE.DoubleSide,
     transparent: true,
 } ));

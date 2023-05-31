@@ -1,4 +1,4 @@
-export const vertexShader = `
+export const vertexShader1 = `
     precision mediump float;
     precision mediump int;
 
@@ -19,28 +19,19 @@ export const vertexShader = `
     }
 `;
 
-export const vertexShader1 = `
-    precision mediump float;
-    precision mediump int;
-
-    uniform mat4 modelViewMatrix;
-    uniform mat4 projectionMatrix;
-
-    attribute vec3 position;
-    attribute vec3 normal;
-    attribute vec2 uv;
-
-    varying vec2 vUv;
-
-    void main()	{
-
-        gl_Position = 0.1 * projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-        vUv = uv;
-    }
+export const vertexShader2 = `
+attribute vec3 position;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+void main()
+{
+  
+  
+  gl_Position = projectionMatrix * modelViewMatrix * sin(vec4(position,1.0));
+}
 `;
 
-export const fragmentShader = `
+export const fragmentShader1 = `
     precision mediump float;
     precision mediump int;
 
@@ -86,12 +77,11 @@ export const fragmentShader = `
     }
 `;
 
-export const fragmentShader1 = `
-varying vec3 vNormal;
+export const fragmentShader2 = `
 
 void main()
       {
-        gl_FragColor = vec4(abs(vNormal),1.0);
+        gl_FragColor = vec4(0.0,0.0,1,1.0);
       }
 `;
 
