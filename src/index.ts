@@ -1,4 +1,4 @@
-import { vertexShader, fragmentShader, vertexShader1, fragmentShader1 } from './utils/shaders';
+import { vertexShader, fragmentShader, vertexShader1} from './utils/shaders';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { initGUI } from './utils/gui';
@@ -33,6 +33,15 @@ layer01.wrapS = layer01.wrapT = THREE.RepeatWrapping;
 const layer02 = new THREE.TextureLoader().load('/textures/layer02.png');
 layer02.wrapS = layer02.wrapT = THREE.RepeatWrapping;
 
+const layer03 = new THREE.TextureLoader().load('/textures/Spiral galaxy.png');
+layer03.wrapS = layer03.wrapT = THREE.RepeatWrapping;
+
+const layer04 = new THREE.TextureLoader().load('/textures/terrainTexture.png');
+layer04.wrapS = layer04.wrapT = THREE.RepeatWrapping;
+
+const layer05 = new THREE.TextureLoader().load('/textures/hi.jpg');
+layer04.wrapS = layer04.wrapT = THREE.RepeatWrapping;
+
 const textureLayer01 = {
     colorMap: layer01,
     flowDirection: new THREE.Vector2(0.7, -0.5),
@@ -47,17 +56,61 @@ const textureLayer02 = {
     repeat: new THREE.Vector2(2,2)
 }
 
+const textureLayer03 = {
+    colorMap: layer03,
+    flowDirection: new THREE.Vector2(-0.7, 0.7),
+    flowSpeed: 0.00005,
+    repeat: new THREE.Vector2(3,3)
+}
+const textureLayer04 = {
+    colorMap: layer04,
+    flowDirection: new THREE.Vector2(-0.7, 0.7),
+    flowSpeed: 0.00005,
+    repeat: new THREE.Vector2(2,2)
+}
+
+const textureLayer05 = {
+    colorMap: layer05,
+    flowDirection: new THREE.Vector2(-0.7, 0.7),
+    flowSpeed: 0.00005,
+    repeat: new THREE.Vector2(2,2)
+}
+
 const uniforms = {
     textureLayer01: {
         value: textureLayer01
     },
     textureLayer02: {
-        value: textureLayer02
+        value: textureLayer03
     },
     time: {
         value: 1.0
     },
 };
+const uniforms1 = {
+    textureLayer01: {
+        value: textureLayer02
+    },
+    textureLayer02: {
+        value: textureLayer04
+    },
+    time: {
+        value: 1.0
+    },
+};
+const uniforms2 = {
+    textureLayer01: {
+        value: textureLayer03
+    },
+    textureLayer02: {
+        value: textureLayer05
+    },
+    time: {
+        value: 1.0
+    },
+};
+
+
 
 // MORPH OBJECT
 const mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 2, 2, 256), new THREE.RawShaderMaterial( {
@@ -70,8 +123,8 @@ const mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 2, 2, 256), new THREE
 scene.add(mesh);
 
 const mesh2 = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 3, 3, 256), new THREE.RawShaderMaterial( {
-    uniforms: uniforms,
-    vertexShader: vertexShader,
+    uniforms: uniforms1,
+    vertexShader: vertexShader1,
     fragmentShader: fragmentShader,
     side: THREE.DoubleSide,
     transparent: true,
@@ -80,9 +133,9 @@ mesh2.position.set(3.5,1,1)
 scene.add(mesh2);
 
 const mesh3 = new THREE.Mesh(new THREE.SphereGeometry(2, 3, 3, 256), new THREE.RawShaderMaterial( {
-    uniforms: uniforms,
-    vertexShader: vertexShader1,
-    fragmentShader: fragmentShader1,
+    uniforms: uniforms2,
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader,
     side: THREE.DoubleSide,
     transparent: true,
 } ));
