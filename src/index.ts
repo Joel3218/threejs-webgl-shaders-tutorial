@@ -1,4 +1,4 @@
-import { vertexShader, fragmentShader } from './utils/shaders';
+import { vertexShader, fragmentShader, vertexShader1, fragmentShader1 } from './utils/shaders';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { initGUI } from './utils/gui';
@@ -68,6 +68,26 @@ const mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 2, 2, 256), new THREE
     transparent: true,
 } ));
 scene.add(mesh);
+
+const mesh2 = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 3, 3, 256), new THREE.RawShaderMaterial( {
+    uniforms: uniforms,
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader,
+    side: THREE.DoubleSide,
+    transparent: true,
+} ));
+mesh2.position.set(3.5,1,1)
+scene.add(mesh2);
+
+const mesh3 = new THREE.Mesh(new THREE.SphereGeometry(2, 3, 3, 256), new THREE.RawShaderMaterial( {
+    uniforms: uniforms,
+    vertexShader: vertexShader1,
+    fragmentShader: fragmentShader1,
+    side: THREE.DoubleSide,
+    transparent: true,
+} ));
+mesh3.position.set(-3.5,1,1)
+scene.add(mesh3);
 
 
 
