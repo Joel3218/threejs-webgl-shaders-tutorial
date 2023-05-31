@@ -1,4 +1,4 @@
-import { vertexShader, fragmentShader, vertexShader1} from './utils/shaders';
+import { vertexShader, fragmentShader, vertexShader1, fragmentShader1} from './utils/shaders';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { initGUI } from './utils/gui';
@@ -36,7 +36,7 @@ layer02.wrapS = layer02.wrapT = THREE.RepeatWrapping;
 const layer03 = new THREE.TextureLoader().load('/textures/Spiral galaxy.png');
 layer03.wrapS = layer03.wrapT = THREE.RepeatWrapping;
 
-const layer04 = new THREE.TextureLoader().load('/textures/terrainTexture.png');
+const layer04 = new THREE.TextureLoader().load('/textures/terrainTexture.jpg');
 layer04.wrapS = layer04.wrapT = THREE.RepeatWrapping;
 
 const layer05 = new THREE.TextureLoader().load('/textures/hi.jpg');
@@ -124,7 +124,7 @@ scene.add(mesh);
 
 const mesh2 = new THREE.Mesh(new THREE.BoxBufferGeometry(2, 3, 3, 256), new THREE.RawShaderMaterial( {
     uniforms: uniforms1,
-    vertexShader: vertexShader1,
+    vertexShader: vertexShader,
     fragmentShader: fragmentShader,
     side: THREE.DoubleSide,
     transparent: true,
@@ -147,6 +147,8 @@ scene.add(mesh3);
 // ANIMATE
 function animate() {
     uniforms.time.value = performance.now();
+    uniforms1.time.value = performance.now();
+    uniforms2.time.value = performance.now();
     orbitControls.update()
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
@@ -163,3 +165,5 @@ function onWindowResize() {
 window.addEventListener('resize', onWindowResize);
 
 initGUI(uniforms);
+initGUI(uniforms1);
+initGUI(uniforms2);
