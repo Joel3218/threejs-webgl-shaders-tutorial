@@ -39,7 +39,7 @@ void main()
 {
   
   
-  gl_Position = projectionMatrix * modelViewMatrix * sin(tan(vec4(position,1.0)));
+  gl_Position = projectionMatrix * modelViewMatrix * cos(vec4(position,1.0));
 }
 `;
 

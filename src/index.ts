@@ -7,6 +7,8 @@ import { initGUI } from './utils/gui';
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xa8def0);
 
+const clock = new THREE.Clock();
+
 // CAMERA
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.y = 3;
@@ -113,12 +115,12 @@ const uniforms2 = {
 const uniformData = {
     time: {
         type: 'f',
-        value: 1.0
+        value: 1.0,
     }
 };
 
 const render = () => {
-    uniformData.time.value = 1.0;
+    uniformData.time.value = 2.0;
     window.requestAnimationFrame(render);
 
 };
@@ -160,13 +162,15 @@ const boxMaterial = new THREE.ShaderMaterial({
     uniforms: uniformData,
     vertexShader:`
     uniform float time;
+    
     void main() {
         gl_Position = projectionMatrix * modelViewMatrix * vec4(tan(position.x) + sin(position.z),  sin(position.y) + sin(time), cos(position.z), 1.0);
     }
     `,
     fragmentShader:`
+    uniform float time;
     void main() {
-        gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+        gl_FragColor = vec4(abs(sin(time)),0.0,0.0,1.0);
     }
     `,
 });
@@ -174,6 +178,10 @@ const boxMesh = new  THREE.Mesh(boxGeometry,boxMaterial);
 boxMesh.position.set(8,1,1)
 scene.add(boxMesh);
 
+function update(){
+    const elapsedTime =  clock.getElapsedTime();
+  //  boxMaterial.uniforms.time.value = elapsedTime;
+}
 // ANIMATE
 function animate() {
     uniforms.time.value = performance.now();
@@ -182,6 +190,13 @@ function animate() {
     orbitControls.update()
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
+     mesh2.rotation.x+=0.01;
+  mesh2.rotation.y+=0.01;
+    mesh2.rotation.z+=0.01;
+
+    mesh3.rotation.x+=0.001;
+  mesh3.rotation.y+=0.001;
+    mesh3.rotation.z+=0.001;
 }
 document.body.appendChild(renderer.domElement);
 animate();
