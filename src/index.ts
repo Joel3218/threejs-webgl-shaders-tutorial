@@ -1,4 +1,4 @@
-import { vertexShader1, fragmentShader1, vertexShader2, fragmentShader2, fragmentShader3} from './utils/shaders';
+import { vertexShader1, fragmentShader1, vertexShader2, fragmentShader2, fragmentShader3, vertexShader3} from './utils/shaders';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { initGUI } from './utils/gui';

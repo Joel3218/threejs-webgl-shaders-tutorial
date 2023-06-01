@@ -31,6 +31,18 @@ void main()
 }
 `;
 
+export const vertexShader3 = `
+attribute vec3 position;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+void main()
+{
+  
+  
+  gl_Position = projectionMatrix * modelViewMatrix * sin(tan(vec4(position,1.0)));
+}
+`;
+
 export const fragmentShader1 = `
     precision mediump float;
     precision mediump int;
